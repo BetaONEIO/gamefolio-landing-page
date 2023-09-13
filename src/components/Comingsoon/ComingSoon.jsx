@@ -1,4 +1,6 @@
 import React from "react";
+import { IMAGES } from "@/assets/images";
+import { SVG } from "@/assets/SVGs";
 
 function ComingSoon() {
   return (
