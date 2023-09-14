@@ -1,16 +1,48 @@
-import React from "react";
-import { IMAGES } from "@/assets/images";
-import { SVG } from "@/assets/SVGs";
+"use client";
+
+import { useState } from "react";
 
 function ComingSoon() {
-  const backgroundImage = `url(${IMAGES.bgImage})`;
+  const [subscribeMail, setSubscribeMail] = useState("");
+  const sectionStyle = {
+    backgroundImage: `linear-gradient(to bottom, rgba(4, 50, 12, 1), rgba(4, 50, 12, 0) 10%),linear-gradient(to top, rgba(0, 50, 12, 1), rgba(0, 50, 12, 0) 10%)`,
+  };
+
+  // handle subscribe mail
+  const handleSubscribeMail = (e) => {
+    setSubscribeMail(e.target.value);
+  };
+
+  const subscribe = (e) => {
+    e.preventDefault();
+
+    if (subscribeMail !== "") {
+      // send mail to backend
+
+      fetch("http://localhost:8000/api/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: subscribeMail,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
+  };
+
+  console.log(subscribeMail);
+  console.log(subscribeMail);
   return (
-    // <section
-    //   style={{ backgroundImage: backgroundImage }}
-    //   className="bg-no-repeat bg-cover bg-center bg-gray-700 bg-blend-multiply bg-opacity-60"
-    // >
-    <section className="bg-gray-50 dark:bg-gray-900">
-      <div className="grid justify-center py-8 px-4 mx-auto max-w-screen-xl lg:gap-12 xl:gap-0 lg:py-16 lg:grid-cols-12">
+    <section style={sectionStyle} className=" bg-[#091619]">
+      <div class="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-12 xl:gap-0 lg:py-16 lg:grid-cols-12">
         <div className="place-self-center  mr-auto mb-10 lg:col-span-7 xl:col-span-8 xl:mb-0">
           <h1 className="mb-6 max-w-2xl text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
             Coming Soon
@@ -39,18 +71,20 @@ function ComingSoon() {
                   </svg>
                 </div>
                 <input
-                  className="block p-3 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:w-80 xl:w-96 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  className="block p-3 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:w-80 xl:w-96 focus:ring-primary-500 focus:border-primary-500 dark:bg-[#091619] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Enter your email"
                   type="email"
-                  id="email"
-                  required=""
+                  required="true"
+                  value={subscribeMail}
+                  onChange={handleSubscribeMail}
                 />
               </div>
               <button
                 type="submit"
-                className="w-full sm:w-auto bg-[#30A55A]  justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                className="w-full sm:w-auto bg-[#37C535] text-white px-5 py-2.5 text-center inline-flex items-center rounded-tl-[20px] rounded-br-[20px] rounded-tr-[5px] rounded-bl-[5px] mb-3"
+                onClick={subscribe}
               >
-                Sign up
+                Sign-up
                 <svg
                   className="ml-2 -mr-1 w-5 h-5"
                   fill="currentColor"
@@ -65,7 +99,8 @@ function ComingSoon() {
                 </svg>
               </button>
             </div>
-            <div className="mt-4 sm:border-t sm:border-gray-400 sm:mt-8 sm:pt-8 dark:border-gray-700">
+
+            <div className="mt-4 sm:border-t sm:border-gray-400 sm:mt-8 sm:pt-8 dark:border-[#091619]">
               <p className="hidden text-base font-medium text-gray-500 sm:block">
                 Follow us on:
               </p>
@@ -95,7 +130,7 @@ function ComingSoon() {
                 <div
                   id="tooltip-facebook"
                   role="tooltip"
-                  className="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700"
+                  className="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-[#091619] rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-[#091619]"
                 >
                   Like us on Facebook
                   <div className="tooltip-arrow" data-popper-arrow></div>
@@ -103,7 +138,7 @@ function ComingSoon() {
                 <a
                   href="#"
                   data-tooltip-target="tooltip-twitter"
-                  className="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer dark:text-gray-400 dark:hover:text-white hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-600"
+                  className="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer dark:text-gray-400 dark:hover:text-white hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-[#091619]"
                 >
                   <svg
                     className="w-8 h-8"
@@ -130,6 +165,12 @@ function ComingSoon() {
               </div>
             </div>
           </form>
+        </div>
+        <div class="hidden lg:mt-0 lg:col-span-5 xl:col-span-4 lg:flex">
+          <img
+            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/mobile-app.svg"
+            alt="phone illustration"
+          />
         </div>
       </div>
     </section>
