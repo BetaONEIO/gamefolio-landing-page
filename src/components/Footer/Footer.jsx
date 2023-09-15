@@ -7,11 +7,10 @@ function Footer() {
         <p className="mb-4 text-sm text-center text-gray-500 dark:text-gray-400 sm:mb-0">
           &copy; 2023{" "}
           <a
-            href="https://gamefolio.com/"
+            href="https://gamefoliodev.vercel.app/"
             className="hover:underline"
-            target="_blank"
           >
-            GameFolio.com
+            gamefolio.gg
           </a>
           . All rights reserved.
         </p>
