@@ -1,11 +1,38 @@
 "use client";
 
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ComingSoon() {
   const [subscribeMail, setSubscribeMail] = useState("");
   const sectionStyle = {
     backgroundImage: `linear-gradient(to bottom, rgba(4, 50, 12, 1), rgba(4, 50, 12, 0) 10%),linear-gradient(to top, rgba(0, 50, 12, 1), rgba(0, 50, 12, 0) 10%)`,
+  };
+
+  const toastSuccess = () =>
+    toast.success("🦄 Wow so easy!", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
+  const toastError = () => {
+    toast.error("Something went wrong", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   };
 
   // handle subscribe mail
@@ -30,16 +57,16 @@ function ComingSoon() {
       })
         .then((response) => response.json())
         .then((data) => {
+          toastSuccess();
           console.log("Success:", data);
         })
         .catch((error) => {
+          toastError();
           console.error("Error:", error);
         });
     }
   };
 
-  console.log(subscribeMail);
-  console.log(subscribeMail);
   return (
     <section style={sectionStyle} className=" bg-[#091619]">
       <div class="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-12 xl:gap-0 lg:py-16 lg:grid-cols-12">
@@ -165,6 +192,18 @@ function ComingSoon() {
               </div>
             </div>
           </form>
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
         </div>
         <div class="hidden lg:mt-0 lg:col-span-5 xl:col-span-4 lg:flex">
           <img
