@@ -19,7 +19,7 @@ function ComingSoon() {
     if (subscribeMail !== "") {
       // send mail to backend
 
-      fetch("http://localhost:8000/api/subscribe", {
+      fetch("https://plausible-tinted-megaraptor.glitch.me/api/subscribe", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
