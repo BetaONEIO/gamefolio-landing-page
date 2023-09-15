@@ -22,8 +22,8 @@ function ComingSoon() {
       theme: "light",
     });
 
-  const toastError = () => {
-    toast.error("Something went wrong", {
+  const toastError = (val) => {
+    toast.error(val, {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -40,30 +40,50 @@ function ComingSoon() {
     setSubscribeMail(e.target.value);
   };
 
+  // subscribe mail logic
   const subscribe = (e) => {
     e.preventDefault();
 
-    if (subscribeMail !== "") {
-      // send mail to backend
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
-      fetch("https://plausible-tinted-megaraptor.glitch.me/api/subscribe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: subscribeMail,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          toastSuccess();
-          console.log("Success:", data);
+    if (subscribeMail !== "") {
+      if (emailRegex.test(subscribeMail)) {
+        // send mail to backend
+
+        fetch("https://plausible-tinted-megaraptor.glitch.me/api/subscribe", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: subscribeMail,
+          }),
         })
-        .catch((error) => {
-          toastError();
-          console.error("Error:", error);
-        });
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.message === "Email sent successfully") {
+              toastSuccess();
+
+              console.log("Success:", data);
+            } else {
+              toastError(data.message);
+            }
+          })
+          .catch((error) => {
+            toastError();
+            console.error("Error:", error);
+          });
+      } else {
+        toastError("Email is not valid!");
+      }
+    } else {
+      toastError("Email is required! ");
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      subscribe();
     }
   };
 
@@ -111,8 +131,9 @@ function ComingSoon() {
               </div>
               <button
                 type="submit"
-                className="w-full sm:w-auto bg-[#37C535] text-white px-5 py-2.5 text-center inline-flex items-center rounded-tl-[20px] rounded-br-[20px] rounded-tr-[5px] rounded-bl-[5px] mb-3"
+                className="w-full sm:w-auto bg-[#37C535] hover:bg-[#217620] text-white px-5 py-2.5 text-center inline-flex items-center rounded-tl-[20px] rounded-br-[20px] rounded-tr-[5px] rounded-bl-[5px] mb-3"
                 onClick={subscribe}
+                onKeyDown={handleKeyPress}
               >
                 Sign-up
                 <svg
