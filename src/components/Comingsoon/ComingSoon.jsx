@@ -11,7 +11,7 @@ function ComingSoon() {
   };
 
   const toastSuccess = () =>
-    toast.success("🦄 Wow so easy!", {
+    toast.success("Successfully Subscribe", {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -68,7 +68,10 @@ function ComingSoon() {
   };
 
   return (
-    <section style={sectionStyle} className=" bg-[#091619]">
+    <section
+      style={sectionStyle}
+      className="h-full flex justify-center bg-[#091619]"
+    >
       <div class="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-12 xl:gap-0 lg:py-16 lg:grid-cols-12">
         <div className="place-self-center  mr-auto mb-10 lg:col-span-7 xl:col-span-8 xl:mb-0">
           <h1 className="mb-6 max-w-2xl text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
