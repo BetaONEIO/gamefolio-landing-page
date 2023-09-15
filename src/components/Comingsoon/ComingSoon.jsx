@@ -63,18 +63,22 @@ function ComingSoon() {
           .then((data) => {
             if (data.message === "Email sent successfully") {
               toastSuccess();
+              setSubscribeMail("");
 
               console.log("Success:", data);
             } else {
               toastError(data.message);
+              setSubscribeMail("");
             }
           })
           .catch((error) => {
-            toastError();
+            toastError("Something went wrong!");
+            setSubscribeMail("");
             console.error("Error:", error);
           });
       } else {
         toastError("Email is not valid!");
+        setSubscribeMail("");
       }
     } else {
       toastError("Email is required! ");
