@@ -1,4 +1,4 @@
 export const IMAGES = {
-  logo: "/Gamefolio-Logo-1.png",
+  logo: "/Gamefolio-Logo-2.png",
   bgImage: "/bgimage.png",
 };

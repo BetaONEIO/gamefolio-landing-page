@@ -10,7 +10,7 @@ function Footer() {
             href="https://gamefoliodev.vercel.app/"
             className="hover:underline"
           >
-            gamefolio.gg
+            gamefolio.com
           </a>
           . All rights reserved.
         </p>
