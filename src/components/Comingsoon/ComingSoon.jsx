@@ -3,6 +3,7 @@ import { IMAGES } from "@/assets/images";
 import { leagueGothic } from "@/font/font";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 function ComingSoon() {
@@ -62,38 +63,66 @@ function ComingSoon() {
           Follow us on socials!
         </span>
         <div className="flex gap-3">
-          <Image
-            className="w-8 h-8"
-            src={SVG.Facebook}
-            width={0}
-            height={0}
-            sizes="100vw"
-            alt="Facebook Logo"
-          />
-          <Image
-            className="w-8 h-8"
-            src={SVG.Twitter}
-            width={0}
-            height={0}
-            sizes="100vw"
-            alt="Twitter Logo"
-          />
-          <Image
-            className="w-8 h-8"
-            src={SVG.Instagram}
-            width={0}
-            height={0}
-            sizes="100vw"
-            alt="Instagram Logo"
-          />
-          <Image
-            className="w-8 h-8"
-            src={SVG.Youtube}
-            width={0}
-            height={0}
-            sizes="100vw"
-            alt="Youtube Logo"
-          />
+          <Link href="https://www.facebook.com/gamefoliogg/" target="_blank">
+            <Image
+              className="w-8 h-8"
+              src={SVG.Facebook}
+              width={0}
+              height={0}
+              sizes="100vw"
+              alt="Facebook Logo"
+            />
+          </Link>
+          <Link href="http://twitter.com/gamefoliogg" target="_blank">
+            <Image
+              className="w-8 h-8"
+              src={SVG.Twitter}
+              width={0}
+              height={0}
+              sizes="100vw"
+              alt="Twitter Logo"
+            />
+          </Link>
+          <Link href="http://instagram.com/gamefoliogg" target="_blank">
+            <Image
+              className="w-8 h-8"
+              src={SVG.Instagram}
+              width={0}
+              height={0}
+              sizes="100vw"
+              alt="Instagram Logo"
+            />
+          </Link>
+          <Link href="https://youtube.com/@GamefolioGG" target="_blank">
+            <Image
+              className="w-8 h-8"
+              src={SVG.Youtube}
+              width={0}
+              height={0}
+              sizes="100vw"
+              alt="Youtube Logo"
+            />
+          </Link>
+          <Link href="https://www.tiktok.com/@gamefoliogg" target="_blank">
+            <Image
+              className="w-8 h-8"
+              src={SVG.Tiktok}
+              width={0}
+              height={0}
+              sizes="100vw"
+              alt="Tiktok Logo"
+            />
+          </Link>
+          <Link href="https://reddit.com/r/gamefolio/" target="_blank">
+            <Image
+              className="w-8 h-8"
+              src={SVG.Reddit}
+              width={0}
+              height={0}
+              sizes="100vw"
+              alt="Reddit Logo"
+            />
+          </Link>
         </div>
       </div>
     </section>

@@ -3,4 +3,6 @@ export const SVG = {
   Twitter: "/twitter.svg",
   Instagram: "/instagram.svg",
   Youtube: "/youtube.svg",
+  Tiktok: "/tiktok.svg",
+  Reddit: "/reddit.svg",
 };
