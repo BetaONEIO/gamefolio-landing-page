@@ -1,5 +1,4 @@
 "use client";
-
 import ComingSoon from "@/components/Comingsoon/ComingSoon";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";

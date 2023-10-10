@@ -128,5 +128,4 @@ function ComingSoon() {
     </section>
   );
 }
-
 export default ComingSoon;
