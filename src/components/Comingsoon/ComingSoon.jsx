@@ -50,7 +50,7 @@ function ComingSoon() {
       <div className="flex flex-col justify-center items-center gap-4 p-4 ">
         <Image
           className="w-48 h-48"
-          src={IMAGES.logo}
+          src={theme == "dark" ? IMAGES.logo : IMAGES.lightLogo}
           width={0}
           height={0}
           sizes="100vw"
