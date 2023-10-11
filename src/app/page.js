@@ -7,7 +7,9 @@ import { ThemeProvider } from "next-themes";
 export default function Home() {
   return (
     <ThemeProvider attribute="class">
-      <div className="h-screen flex flex-col justify-between bg-gray-50 dark:bg-gray-900">
+      <div
+        className={`h-screen flex flex-col justify-between bg-lightbg dark:bg-darkbg`}
+      >
         {/* <Header />
       <ComingSoon />
       <Footer /> */}

@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .flex-grow {
   flex-grow: 1;
   background-color: bisque;

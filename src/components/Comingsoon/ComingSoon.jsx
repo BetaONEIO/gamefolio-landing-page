@@ -10,6 +10,8 @@ function ComingSoon() {
   const { systemTheme, theme, setTheme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
 
+
+
   return (
     <section className="h-full flex justify-center items-center ">
       <button
