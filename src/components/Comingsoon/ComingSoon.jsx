@@ -10,8 +10,6 @@ function ComingSoon() {
   const { systemTheme, theme, setTheme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
 
-
-
   return (
     <section className="h-full flex justify-center items-center ">
       <button
@@ -50,15 +48,22 @@ function ComingSoon() {
         </svg>
       </button>
       <div className="flex flex-col justify-center items-center gap-4 p-4 ">
-        <Image
-          className="w-48 h-48"
-          src={theme == "dark" ? IMAGES.logo : IMAGES.lightLogo}
-          width={0}
-          height={0}
-          sizes="100vw"
-          alt="GameFolio"
-          priority={true}
-        />
+        <div className="flex flex-col items-center justify-center">
+          <Image
+            className="w-48 h-48"
+            src={IMAGES.logo}
+            width={0}
+            height={0}
+            sizes="100vw"
+            alt="GameFolio"
+            priority={true}
+          />
+          <span
+            className={`${leagueGothic.className} text-2xl text-black dark:text-white  tracking-wider`}
+          >
+            GAMEFOLIO
+          </span>
+        </div>
         <span
           className={`${leagueGothic.className} text-4xl text-black dark:text-white  tracking-wider`}
         >
