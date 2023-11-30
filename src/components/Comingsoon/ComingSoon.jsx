@@ -130,6 +130,16 @@ function ComingSoon() {
               alt="Reddit Logo"
             />
           </Link>
+          <Link href="https://discord.gg/jTHEq8TrSr" target="_blank">
+            <Image
+              className="w-8 h-8"
+              src={SVG.Discord}
+              width={0}
+              height={0}
+              sizes="100vw"
+              alt="Discord Logo"
+            />
+          </Link>
         </div>
       </div>
     </section>
