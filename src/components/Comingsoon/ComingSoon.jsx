@@ -137,7 +137,7 @@ function ComingSoon() {
               width={0}
               height={0}
               sizes="100vw"
-              alt="Discord Logo"
+              alt="Discord Logo - join us on Discord!"
             />
           </Link>
         </div>
