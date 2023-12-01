@@ -5,4 +5,5 @@ export const SVG = {
   Youtube: "/youtube.svg",
   Tiktok: "/tiktok.svg",
   Reddit: "/reddit.svg",
+  Discord: "/discord.svg",
 };
