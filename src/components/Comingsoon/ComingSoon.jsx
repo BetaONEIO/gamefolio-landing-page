@@ -100,7 +100,7 @@ function ComingSoon() {
               alt="Instagram Logo"
             />
           </Link>
-          <Link href="https://youtube.com/@GamefolioGG" target="_blank">
+          <Link href="https://www.youtube.com/@Gamefolio_" target="_blank">
             <Image
               className="w-8 h-8"
               src={SVG.Youtube}
