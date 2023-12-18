@@ -75,21 +75,25 @@ function ComingSoon() {
             if (data.message === "Email sent successfully") {
               toastSuccess();
               setSubscribeMail("");
+              setMessage("");
 
               console.log("Success:", data);
             } else {
               toastError(data.message);
               setSubscribeMail("");
+              setMessage("");
             }
           })
           .catch((error) => {
             toastError("Something went wrong!");
             setSubscribeMail("");
+            setMessage("");
             console.error("Error:", error);
           });
       } else {
         toastError("Email is not valid!");
         setSubscribeMail("");
+        setMessage("");
       }
     } else {
       toastError("Email is required! ");
