@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function ComingSoon() {
+function ComingSoonEmail() {
   const [subscribeMail, setSubscribeMail] = useState("");
   const sectionStyle = {
     backgroundImage: `linear-gradient(to bottom, rgba(4, 50, 12, 1), rgba(4, 50, 12, 0) 10%),linear-gradient(to top, rgba(0, 50, 12, 1), rgba(0, 50, 12, 0) 10%)`,
@@ -246,4 +246,4 @@ function ComingSoon() {
   );
 }
 
-export default ComingSoon;
+export default ComingSoonEmail;
