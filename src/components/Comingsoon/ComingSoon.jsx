@@ -12,9 +12,13 @@ import "react-toastify/dist/ReactToastify.css";
 function ComingSoon() {
   const { systemTheme, theme, setTheme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
+  const initialFormData = {
+    name: "",
+    email: "",
+    message: "",
+  };
 
-  const [subscribeMail, setSubscribeMail] = useState("");
-  const [message, setMessage] = useState("");
+  const [formData, setFormData] = useState(initialFormData);
 
   const toastSuccess = () =>
     toast.success("Thanks for subscribing!", {
@@ -41,13 +45,24 @@ function ComingSoon() {
     });
   };
 
-  // handle subscribe mail
-  const handleSubscribeMail = (e) => {
-    setSubscribeMail(e.target.value);
+  const isNotEmpty = (formData) => {
+    for (const key in formData) {
+      if (!formData[key]) {
+        return false;
+      }
+    }
+    return true;
   };
-  // handle subscribe mail
-  const handleMessage = (e) => {
-    setMessage(e.target.value);
+  const handleReset = () => {
+    setFormData(initialFormData);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   // subscribe mail logic
@@ -56,8 +71,8 @@ function ComingSoon() {
 
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
-    if (subscribeMail !== "" && subscribeMail !== "") {
-      if (emailRegex.test(subscribeMail)) {
+    if (isNotEmpty(formData)) {
+      if (emailRegex.test(formData.email)) {
         // send mail to backend
 
         fetch("https://plausible-tinted-megaraptor.glitch.me/api/subscribe", {
@@ -66,37 +81,31 @@ function ComingSoon() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            email: subscribeMail,
-            message: message,
+            name: formData.name,
+            email: formData.email,
+            message: formData.message,
           }),
         })
           .then((response) => response.json())
           .then((data) => {
             if (data.message === "Email sent successfully") {
               toastSuccess();
-              setSubscribeMail("");
-              setMessage("");
-
-              console.log("Success:", data);
+              handleReset();
             } else {
               toastError(data.message);
-              setSubscribeMail("");
-              setMessage("");
+              handleReset();
             }
           })
           .catch((error) => {
             toastError("Something went wrong!");
-            setSubscribeMail("");
-            setMessage("");
-            console.error("Error:", error);
+            handleReset();
           });
       } else {
         toastError("Email is not valid!");
-        setSubscribeMail("");
-        setMessage("");
+        handleReset();
       }
     } else {
-      toastError("Email is required! ");
+      toastError("Fill all fields! ");
     }
   };
 
@@ -244,6 +253,29 @@ function ComingSoon() {
           <form className="">
             <div className="justify-center items-center mx-auto mb-3 space-y-4 sm:flex lg:justify-start sm:space-y-0 sm:space-x-4">
               <div className="relative">
+                <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                  <svg
+                    className="w-5 h-5 text-gray-500 dark:text-gray-400"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24"
+                    viewBox="0 -960 960 960"
+                    width="24"
+                  >
+                    <path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z" />
+                  </svg>
+                </div>
+                <input
+                  className="block p-3 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:w-80 xl:w-48 focus:ring-primary-500 focus:border-primary-500 dark:bg-[#091619] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="Name"
+                  type="text"
+                  required={true}
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="relative">
                 <label
                   htmlFor="email"
                   className="hidden mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -262,12 +294,13 @@ function ComingSoon() {
                   </svg>
                 </div>
                 <input
-                  className="block p-3 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:w-80 xl:w-96 focus:ring-primary-500 focus:border-primary-500 dark:bg-[#091619] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  className="block p-3 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:w-80 xl:w-60 focus:ring-primary-500 focus:border-primary-500 dark:bg-[#091619] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Enter your email"
                   type="email"
                   required={true}
-                  value={subscribeMail}
-                  onChange={handleSubscribeMail}
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                 />
               </div>
               <div className="relative">
@@ -289,13 +322,14 @@ function ComingSoon() {
                   type="text"
                   rows={1}
                   required={true}
-                  value={message}
-                  onChange={handleMessage}
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                 />
               </div>
               <button
                 type="submit"
-                className="w-full sm:w-auto bg-[#37C535] hover:bg-[#217620] text-white px-5 py-2.5 text-center inline-flex items-center rounded-tl-[20px] rounded-br-[20px] rounded-tr-[5px] rounded-bl-[5px] mb-3"
+                className="w-full sm:w-auto bg-[#37C535] hover:bg-[#217620] text-white px-5 py-2.5 text-center inline-flex items-center rounded-tl-[20px] rounded-br-[20px] rounded-tr-[5px] rounded-bl-[5px] mb-3 "
                 onClick={subscribe}
                 onKeyDown={handleKeyPress}
               >
@@ -315,6 +349,7 @@ function ComingSoon() {
               </button>
             </div>
           </form>
+
           <ToastContainer
             position="top-center"
             autoClose={5000}
