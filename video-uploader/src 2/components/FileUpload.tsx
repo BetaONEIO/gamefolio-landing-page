@@ -2,13 +2,8 @@ import React, { useState, useCallback } from 'react';
 import { Upload, Loader } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import toast from 'react-hot-toast';
-import { FormData } from './types';
 
-interface FileUploadProps {
-  formData?: FormData;
-}
-
-export function FileUpload({ formData }: FileUploadProps) {
+export function FileUpload() {
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
 
@@ -22,6 +17,7 @@ export function FileUpload({ formData }: FileUploadProps) {
         return;
       }
 
+      // Changed to 1GB limit (1024 * 1024 * 1024 bytes)
       if (file.size > 1024 * 1024 * 1024) {
         toast.error('File size must be less than 1GB');
         return;
@@ -41,16 +37,12 @@ export function FileUpload({ formData }: FileUploadProps) {
 
       if (uploadError) throw uploadError;
 
-      const { error: notifyError } = await supabase.functions.invoke('notify-upload', {
-        body: { 
-          fileName: file.name, 
-          fileUrl: data?.path,
-          formData
-        },
+      const { error: emailError } = await supabase.functions.invoke('notify-upload', {
+        body: { fileName: file.name, fileUrl: data?.path },
       });
 
-      if (notifyError) {
-        console.error('Error sending notification:', notifyError);
+      if (emailError) {
+        console.error('Error sending email notification:', emailError);
       }
 
       toast.success('Video uploaded successfully!');
@@ -61,7 +53,7 @@ export function FileUpload({ formData }: FileUploadProps) {
       setUploading(false);
       setProgress(0);
     }
-  }, [formData]);
+  }, []);
 
   return (
     <div className="w-full">

@@ -9,7 +9,7 @@ const initialFormData: FormData = {
   acceptTerms: false,
 };
 
-export function useForm(onSubmit?: (data: FormData) => void) {
+export function useForm() {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [errors, setErrors] = useState<FormErrors>({});
 
@@ -54,7 +54,15 @@ export function useForm(onSubmit?: (data: FormData) => void) {
     e.preventDefault();
     
     if (validateForm()) {
-      onSubmit?.(formData);
+      try {
+        // Here you would typically send the data to your backend
+        console.log('Form submitted:', formData);
+        // Reset form after successful submission
+        setFormData(initialFormData);
+        setErrors({});
+      } catch (error) {
+        console.error('Error submitting form:', error);
+      }
     }
   };
 

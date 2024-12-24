@@ -1,13 +1,9 @@
 import React from 'react';
 import { useForm } from './hooks/useForm';
-import { CreatorType, FormData } from './types';
+import { CreatorType } from './types';
 
-interface SubmissionFormProps {
-  onSubmit: (data: FormData) => void;
-}
-
-export function SubmissionForm({ onSubmit }: SubmissionFormProps) {
-  const { formData, handleChange, handleSubmit, errors } = useForm(onSubmit);
+export function SubmissionForm() {
+  const { formData, handleChange, handleSubmit, errors } = useForm();
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">

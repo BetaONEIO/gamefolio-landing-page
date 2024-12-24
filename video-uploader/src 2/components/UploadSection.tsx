@@ -1,16 +1,8 @@
-import { useState } from 'react';
 import { FileUpload } from './FileUpload';
 import { VideoRequirements } from './VideoRequirements';
 import { SubmissionForm } from './SubmissionForm';
-import { FormData } from './types';
 
 export function UploadSection() {
-  const [formData, setFormData] = useState<FormData | undefined>();
-
-  const handleFormSubmit = (data: FormData) => {
-    setFormData(data);
-  };
-
   return (
     <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 md:p-12 shadow-2xl">
       <div className="max-w-4xl mx-auto">
@@ -20,7 +12,7 @@ export function UploadSection() {
         
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-8">
-            <FileUpload formData={formData} />
+            <FileUpload />
             <VideoRequirements />
           </div>
           
@@ -29,7 +21,7 @@ export function UploadSection() {
               <h3 className="text-xl font-semibold text-white mb-4">
                 Submit Your Details
               </h3>
-              <SubmissionForm onSubmit={handleFormSubmit} />
+              <SubmissionForm />
             </div>
           </div>
         </div>
